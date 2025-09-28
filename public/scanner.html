@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>二维码扫描 - 实时分享</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="scanner-page">
+    <div class="container">
+        <div class="header">
+            <a href="index.html" class="back-btn">← 返回</a>
+            <h1>🏠 课堂扫码</h1>
+        </div>
+
+        <div class="scanner-main">
+            <div class="video-container">
+                <video id="video" autoplay webkit-playsinline="true" playsinline="true"></video>
+                <div class="scanner-overlay">
+                    <div class="scanner-frame"></div>
+                    <div class="scanner-corners">
+                        <div class="corner top-left"></div>
+                        <div class="corner top-right"></div>
+                        <div class="corner bottom-left"></div>
+                        <div class="corner bottom-right"></div>
+                    </div>
+                </div>
+
+                <!-- 状态显示 -->
+                <div class="status-overlay">
+                    <div class="status-indicator">
+                        <span class="status-dot" id="statusDot"></span>
+                        <span id="scannerStatus">点击启动摄像头</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 底部工具栏 -->
+            <div class="bottom-toolbar">
+                <div class="tool-row">
+                    <!-- 变焦滑轮 -->
+                    <div class="zoom-control">
+                        <span class="zoom-label">焦距</span>
+                        <input type="range" id="zoomSlider" class="zoom-slider" min="0.5" max="3" step="0.1" value="1">
+                        <span id="zoomLevel">1x</span>
+                    </div>
+                </div>
+
+                <div class="tool-row">
+                    <!-- 功能按钮 -->
+                    <button id="startCamera" class="tool-btn primary">🎥 启动</button>
+                    <button id="switchCamera" class="tool-btn" style="display: none;">🔄 切换</button>
+                    <button id="checkInBtn" class="tool-btn success" style="display: none;">✅ 签到</button>
+                    <button id="copyUrl" class="tool-btn secondary">📋 分享</button>
+                </div>
+            </div>
+
+            <!-- 扫描结果 -->
+            <div class="scan-result" id="scanResult" style="display: none;">
+                <div class="result-content" id="scanContent"></div>
+                <div class="result-time" id="scanTime"></div>
+            </div>
+
+            <!-- QR日志区域 -->
+            <div class="qr-log">
+                <h3>📋 二维码日志</h3>
+                <div class="log-container" id="logContainer">
+                    <div class="log-entry">
+                        <span class="log-time">[待机]</span> 等待扫描二维码...
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://unpkg.com/jsqr@1.4.0/dist/jsQR.js"></script>
+    <script src="js/scanner.js"></script>
+</body>
+</html>

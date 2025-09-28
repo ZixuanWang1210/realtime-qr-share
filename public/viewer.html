@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>二维码观看 - 实时同步</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="viewer-page">
+    <div class="container">
+        <div class="header">
+            <a href="index.html" class="back-btn">← 返回</a>
+            <h1>👀 二维码观看</h1>
+        </div>
+
+        <div class="viewer-container">
+            <div class="connection-status">
+                <div class="status-indicator">
+                    <span class="status-dot" id="connectionDot"></span>
+                    <span id="connectionStatus">连接中...</span>
+                </div>
+                <div class="scanner-info">
+                    <span>活跃扫码者: </span>
+                    <span id="scannerCount">0</span>
+                </div>
+            </div>
+
+            <div class="qr-display" id="qrDisplay">
+                <div class="no-qr-message">
+                    <div class="waiting-icon">⏳</div>
+                    <h2>等待二维码扫描...</h2>
+                    <p>请确保有扫码者在现场扫描二维码</p>
+                </div>
+            </div>
+
+            <div class="qr-info" id="qrInfo" style="display: none;">
+                <div class="qr-content">
+                    <h3>二维码内容:</h3>
+                    <div class="content-display" id="contentDisplay"></div>
+                </div>
+
+                <div class="qr-actions">
+                    <button id="copyBtn" class="btn btn-secondary">📋 复制内容</button>
+                    <button id="openBtn" class="btn btn-primary" style="display: none;">🔗 打开链接</button>
+                </div>
+
+                <div class="qr-metadata">
+                    <div class="metadata-item">
+                        <span class="label">扫描时间:</span>
+                        <span id="scanTime"></span>
+                    </div>
+                    <div class="metadata-item">
+                        <span class="label">内容类型:</span>
+                        <span id="contentType"></span>
+                    </div>
+                    <div class="metadata-item">
+                        <span class="label">内容长度:</span>
+                        <span id="contentLength"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="viewer-stats">
+                <h3>📊 实时统计</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value" id="totalScans">0</div>
+                        <div class="stat-label">总扫描次数</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="sessionTime">00:00</div>
+                        <div class="stat-label">会话时长</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="lastUpdate">-</div>
+                        <div class="stat-label">最后更新</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="qr-log">
+                <h3>📊 接收日志</h3>
+                <div class="log-container" id="qrLog"></div>
+            </div>
+
+            <div class="instructions">
+                <h3>💡 功能说明</h3>
+                <ul>
+                    <li><strong>实时同步</strong>：二维码内容会自动实时更新，无需刷新页面</li>
+                    <li><strong>链接识别</strong>：自动识别URL链接，可直接点击跳转</li>
+                    <li><strong>内容复制</strong>：点击复制按钮可将内容复制到剪贴板</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/viewer.js"></script>
+</body>
+</html>
